@@ -57,7 +57,8 @@ pkg_install () {
     if [[ "$OS" = Windows ]]; then
         in_dir "$install_dir" npm install "$(cpdir "$pkg")"
     else
-        in_dir "$install_dir" npm install "$pkg"
+        in_dir "$src_dir" npm pack
+        in_dir "$install_dir" npm install "$src_dir/packed-$npm_package-$version.tgz"
     fi
 
     local bin_dir="$install_dir/node_modules/$full_npm_package/node_modules/.bin/"
